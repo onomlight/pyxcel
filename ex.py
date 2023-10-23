@@ -60,7 +60,7 @@ replacements = {
 }
 
 # 파란색 스타일 설정
-blue_fill = PatternFill(start_color="0000FF", end_color="0000FF", fill_type="solid")
+blue_fill = PatternFill(start_color="00FFFF", end_color="00FFFF", fill_type="solid")
 
 
 # N열 2행부터 3000행까지 값 비교 및 변경
