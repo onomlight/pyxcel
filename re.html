@@ -1,0 +1,36 @@
+// Alt + F11
+
+선택 2 번 나누기
+Sub ReplaceText()
+    Dim ws As Worksheet
+    Dim lastRow As Long
+    Dim i As Long
+    Dim data As String
+    Dim result As String
+    Dim select1 As String
+    Dim select2 As String
+    Dim select3 As String
+    Dim select3Index As Long
+
+    ' 현재 시트 가져오기
+    Set ws = ThisWorkbook.Sheets("Sheet1") ' 시트명을 변경할 수 있습니다
+
+    ' 마지막 행 가져오기
+    lastRow = ws.Cells(ws.Rows.Count, "J").End(xlUp).Row
+
+    ' 각 행별로 작업 수행
+    For i = 2 To lastRow
+        ' 데이터 입력
+        data = ws.Cells(i, "J").Value
+
+        ' 선택 3 데이터 추출
+        select3Index = InStr(data, "선택2:")
+
+        If select3Index > 0 Then
+            ' 선택 3이 있는 경우
+            select3 = Mid(data, select3Index)
+            ' 선택 3 값 할당
+            ws.Cells(i, "K").Value = Trim(Replace(select3, "선택2:", "원하는명"))
+        End If
+    Next i
+End Sub
