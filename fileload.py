@@ -16,11 +16,14 @@ mapping_dict = dict(zip(zip(df['상품명'], df['옵션명']), df['O']))
 # 'O' 값 입력
 df['O'] = list(map(lambda row: mapping_dict.get((row['상품명'], row['옵션명']), ''), df[['상품명', '옵션명']].to_records(index=False)))
 
-# 딕셔너리 형식으로 저장
-mapping_list = [f"('{m}','{n}'):''," for m, n in zip(df['상품명'], df['옵션명'])]
+# 딕셔너리를 직접 엑셀 파일로 저장
+with pd.ExcelWriter(output_file_path, engine='xlsxwriter') as writer:
+    # 데이터프레임을 엑셀 파일에 쓰기
+    df.to_excel(writer, index=False)
 
-# 딕셔너리를 파일로 저장
-with open('mapping_output.txt', 'w') as file:
-    file.write('\n'.join(mapping_list))
+    # 딕셔너리를 새로운 시트로 추가
+    mapping_df = pd.DataFrame(list(mapping_dict.keys()), columns=['M', 'N'])
+    mapping_df['O'] = ''
+    mapping_df.to_excel(writer, sheet_name='Mapping', index=False)
 
 print("작업이 완료되었습니다.")
