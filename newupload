@@ -6,6 +6,10 @@ file_path = 'bigtest.xlsx'
 # 엑셀 파일 불러오기
 df = pd.read_excel(file_path)
 
+# 'M' 열이 데이터프레임에 존재하지 않으면 에러 출력
+if 'M' not in df.columns:
+    raise ValueError("'M'열이 데이터프레임에 존재하지 않습니다.")
+
 # 딕셔너리 형식으로 저장
 output_list = [f"('{m}', '{n}': '{o}')" for m, n, o in zip(df['M'], df['N'], df['O'])]
 
