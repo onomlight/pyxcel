@@ -38,7 +38,7 @@ if 'Unnamed: 14' not in df.columns:
     raise ValueError("'Unnamed: 14' 열이 데이터프레임에 존재하지 않습니다.")
 
 # 딕셔너리 형식으로 저장
-output_list = [f"('{m}', '{n}': '{o}')," for m, n, o in zip(df['상품명'], df['옵션명'], df['Unnamed: 14'])]
+output_list = [f"('{m}', '{n}'): '{o}'," for m, n, o in zip(df['상품명'], df['옵션명'], df['Unnamed: 14'])]
 # 리스트를 DataFrame으로 변환
 result_df = pd.DataFrame(output_list, columns=['(M, N): O'])
 
